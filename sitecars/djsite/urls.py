@@ -6,5 +6,6 @@ urlpatterns = [
     path("update/", editData),
     path("search/", searchData),
     path("load/", loadData),
-    path("getchar/", getCharacter)
+    path("getchar/", getCharacter),
+    path('characters/', CharacterListView.as_view(), name='character-list'),
 ]

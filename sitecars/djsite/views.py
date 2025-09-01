@@ -1,6 +1,11 @@
 from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+
+from .filters import CharacterFilter
 from .models import *
 from .serializers import *
 import requests
@@ -85,6 +90,22 @@ def getCharacter(request):
     print(f"Character: {character.name}")
     print(f"From: {character.origin.name}")
     return Response({"ok": "ok"})
+
+
+class CharacterListView(generics.ListAPIView):
+    queryset = RickAndMortyCharacter.objects.all().select_related('origin')
+    serializer_class = RickAndMortyCharacterSerializer
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_class = CharacterFilter
+    search_fields = ['name', 'species', 'origin__name']
+    ordering_fields = ['name', 'created', 'origin__name']
+    ordering = ['name']  # Сортировка по умолчанию
+
+    # Можно переопределить queryset для дополнительной фильтрации
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Дополнительная логика если нужно
+        return queryset
 
 
 
