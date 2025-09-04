@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "djsite",
     "rest_framework",
+    'djoser',
     # 'corsheaders',
     'django_filters',
 ]

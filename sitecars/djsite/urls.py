@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path, include
 from .views import *
 urlpatterns = [
     path("", getData),
@@ -8,4 +8,5 @@ urlpatterns = [
     path("load/", loadData),
     path("getchar/", getCharacter),
     path('characters/', CharacterListView.as_view(), name='character-list'),
+    re_path(r'^auth/', include('djoser.urls')),
 ]
