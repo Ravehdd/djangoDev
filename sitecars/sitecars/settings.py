@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "djsite",
     "rest_framework",
+    "rest_framework.authtoken",
     'djoser',
     # 'corsheaders',
     'django_filters',
@@ -133,4 +134,8 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.TokenAuthentication',
+
+        ),
 }

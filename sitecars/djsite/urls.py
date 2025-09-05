@@ -9,4 +9,5 @@ urlpatterns = [
     path("getchar/", getCharacter),
     path('characters/', CharacterListView.as_view(), name='character-list'),
     re_path(r'^auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
 ]
